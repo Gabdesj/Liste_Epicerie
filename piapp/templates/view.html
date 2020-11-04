@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Table ingredients{% endblock %}
+{% block content %}
+
+<table class="table table-hover">
+	<caption>Liste des ingrédient actuelle</caption>
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Nom du repas</th>
+      <th scope="col">Ingrédient</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for item in values %}	
+	<tr>
+      <td>{{item.nomRepas}}</td>
+      <td>{{item.ingredient}}</td>
+    </tr>
+{% endfor %}    
+  </tbody>
+</table>
+
+	
+{% endblock %}
+
+

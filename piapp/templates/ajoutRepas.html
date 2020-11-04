@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title%}Ajout d'un repas{% endblock %}
+{% block content%}
+{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for msg in messages %}
+				<p>{{msg}}</p>
+			{% endfor %}
+		{% endif %}
+{% endwith %}
+
+
+
+{% if session["nbr_ing"] == None %}
+	<div>
+		<form action="#" method="post">
+		<p> Combien d'ingrédients comporte le repas à ajouter? </p>
+		<p><input class="form-control form-control-lg" type="number" name="f_nbrIngredient" min="1" style="width:5%" ></p>
+		<p><input type="submit" value="Confirmer le nombre d'ingrédients"/> </p>
+		</form>
+	</div>	
+
+
+
+{% elif session["nbr_ing"] != None %}
+<div>
+<form action="/ajoutRepas_query" method="post">
+	<p> Entrer le nom du repas à ajouter dans la liste</p>
+	<p><input class="form-control form-control-lg" type="text" placeholder="Nom du repas" name="f_repas"></p>
+	<p> Entrer les {{session["nbr_ing"]}} ingrédients requis pour ce repas</p>
+	{% for i in range(session["nbr_ing"]) %}
+		{% with f_ingredient = "f_ingredient{}".format(i+1) %}
+			<p><input class="form-control form-control-lg" type="text" placeholder="ingrédient" name={{f_ingredient}}></p>
+		{% endwith %}
+	{% endfor %}
+	<p><input type="submit" value="Ajouter le repas"/> </p>
+</form>	
+</div>
+{% endif %}
+{% endblock %}

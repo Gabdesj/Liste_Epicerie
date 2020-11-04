@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title%}Menu principal{% endblock %}
+{% block content%}
+
+{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for msg in messages %}
+				<p>{{msg}}</p>
+			{% endfor %}
+		{% endif %}
+{% endwith %}
+
+
+<div class="jumbotron">
+  <h1 class="display-4">Bienvenue!</h1>
+  <p class="lead"> Veuillez choisir une option ci dessous pour générer automatiquement les listes d'épicerie</p>
+  <hr class="my-4">
+  <p>Version 1.1</p>
+</div>
+
+<p> Sélectionner une option :</p>
+<div>
+<a class="btn btn-primary" href="/ajoutRepas" role="button">Ajouter un repas dans la liste</a>
+<a class="btn btn-danger" href="/enleverRepas" role="button">Enlever un repas dans la liste</a>
+<a class="btn btn-success" href="/printListe" role="button">Générer une liste d'épicerie</a>
+<a class="btn btn-dark" href="/viewtable" role="button">Afficher la table des repas actuelle</a>
+<a class="btn btn-warning" href="/circulaire" role="button">Générer une liste à partir du circulaire</a>
+</div>
+
+{% endblock %}

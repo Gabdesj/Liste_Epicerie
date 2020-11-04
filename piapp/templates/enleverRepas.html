@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title%}Enlever un repas{% endblock %}
+{% block content%}
+{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for msg in messages %}
+				<p>{{msg}}</p>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+
+
+
+
+<div class="container">
+  <h2>Sélectionner le repas à supprimer de la liste:</h2>
+  <form action="/enleverRepas_query" method="post">
+    <div class="form-group">
+      <select class="form-control" id="sel1" name="f_dropdown">
+{% for repas in listeRepas %}		  
+        <option>{{repas}}</option>
+{% endfor %}
+      </select>
+      <p><input type="submit" value="Supprimer définitivement le repas de la liste"/> </p>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

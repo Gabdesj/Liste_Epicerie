@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block title%}Générer liste{% endblock %}
+{% block content%}
+{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for msg in messages %}
+				<p>{{msg}}</p>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+
+<h2>Sélectionner les repas de la semaine:</h2>
+
+
+
+<form action="/confirmation" method="post">
+	
+<div class="custom-control custom-checkbox">
+  <input type="checkbox" class="custom-control-input" id="customCheck1" name="checkbox">
+  <label class="custom-control-label" for="customCheck1">Générer une liste aléatoire</label>
+</div>
+	
+<table class="table table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Lundi</th>
+      <th scope="col">Mardi</th></th>
+      <th scope="col">Mercredi</th>
+      <th scope="col">Jeudi</th>
+      <th scope="col">Vendredi</th>
+      <th scope="col">Samedi</th>
+      <th scope="col">Dimanche</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+		
+		
+      <td>
+	<select class="form-control" id="sel1" name="f_dropdown1">
+{% for repas in listeRepas %}		  
+        <option>{{repas}}</option>
+{% endfor %}
+      </select>
+      </td>
+      
+      
+      
+      <td>
+      <select class="form-control" id="sel2" name="f_dropdown2">
+{% for repas in listeRepas %}		  
+        <option>{{repas}}</option>
+{% endfor %}
+      </select>
+      </td>
+      
+      
+      
+      <td>
+      <select class="form-control" id="sel3" name="f_dropdown3">
+{% for repas in listeRepas %}		  
+        <option>{{repas}}</option>
+{% endfor %}
+      </select>
+      </td>
+      
+      
+      
+      <td>
+      <select class="form-control" id="sel4" name="f_dropdown4">
+{% for repas in listeRepas %}		  
+        <option>{{repas}}</option>
+{% endfor %}
+      </select>
+      </td>
+      
+      
+      
+      <td>
+      <select class="form-control" id="sel5" name="f_dropdown5">
+{% for repas in listeRepas %}		  
+        <option>{{repas}}</option>
+{% endfor %}
+      </select>
+      </td>
+      
+      
+      
+      <td>
+      <select class="form-control" id="sel6" name="f_dropdown6">
+{% for repas in listeRepas %}		  
+        <option>{{repas}}</option>
+{% endfor %}
+      </select>
+      </td>
+      
+      
+      
+      <td>
+     <select class="form-control" id="sel7" name="f_dropdown7">
+{% for repas in listeRepas %}		  
+        <option>{{repas}}</option>
+{% endfor %}
+      </select>
+      </td>
+      
+      
+    </tr>
+  </tbody>
+</table>
+<p><input type="submit" value="Générer la liste d'épicerie (Magie!)"/> </p>
+</form>
+
+
+{% endblock %}
+

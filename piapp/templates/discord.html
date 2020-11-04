@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title%}Enlever un repas{% endblock %}
+{% block content%}
+{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for msg in messages %}
+				<p>{{msg}}</p>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+
+
+<body>
+
+    <h1>Serveur Discord</h1>
+    
+
+    <iframe src="https://discordapp.com/widget?id=272491042928852995&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+    </body>
+
+{% endblock %}

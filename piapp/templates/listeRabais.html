@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title%}Rabais Circulaire{% endblock %}
+{% block content%}
+{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for msg in messages %}
+				<p>{{msg}}</p>
+			{% endfor %}
+		{% endif %}
+    {% endwith %}
+    
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(function () { // Utiliser la fonction sorted() pour mettre les ingrédients en ordre alphabétique
+     
+        $("#addButton").on("click", function () {
+            //if ($(".type").length > 10) { // Number of boxes.
+              //  alert("Only 5 textboxes allow");
+    //
+    //           return false;
+    //      } 
+            
+            var newType = $(".type").first().clone().addClass("newAdded"); // Clone the group and add a new class.
+               
+            newType.appendTo("#ligneIngredient"); // ajout d'une nouvelle boîte
+            
+            // on met à jour le nombre de boîtes actives
+              
+            var nombreIngredients = $(".type").length.toString(); // Valeur à envoyer dans l'input invisible
+            
+            $("#nbrIngredients").val(nombreIngredients)
+
+           // document.getElementById("nbrIngredients").innerText = nombreIngredients; // On sauvegarde le nombre d'inputs dans l'input invisible qui sera envoyé par méthode POST au serveur pour traitement backend
+           
+    
+            $("select:last").attr("name", "f_dropdown"+nombreIngredients);
+           
+        });
+    
+        $("#removeButton").on("click", function () {
+            if ($(".type").length == 1) { // Number of boxes.
+                alert("Vous ne pouvez pas enlever plus d'ingrédients");
+    
+                return false;
+            }
+    
+            $(".type").last().remove(); // Remove the last group (le dernier dropdown)
+            
+            // on met à jour le nombre de boîtes actives
+            var nombreIngredients = $(".type").length.toString();
+            $("#nbrIngredients").val(nombreIngredients)
+           // document.getElementById("nbrIngredients").innerText = nombreIngredients; 
+           
+        });
+    
+        $("#resetButton").on("click", function () {
+            $(".newAdded").remove(); // Remove all newly added groups.
+            // on met à jour le nombre de boîtes actives (qui est normalement de 1 si tout va bien)
+            var nombreIngredients = $(".type").length.toString();
+            $("#nbrIngredients").val(nombreIngredients)
+           
+        });
+    });
+        
+    </script>
+    </head>
+<form action="/listeCirculaire" method="post">
+    <table id="ligneIngredient">
+        <tr class="type">
+            <td>
+                <select class="form-control" name="f_dropdown1">
+                    {% for repas in listeRepas %}		  
+                        <option>{{repas}}</option>
+                    {% endfor %}
+                    
+                </select>
+            </td>
+        </tr>
+       
+    </table>
+    <table>
+        <tr>
+        <tr>
+         
+        </tr>
+            <td>
+                <input type="button" class="btn btn-primary" id="addButton" value="Ajout d'un ingrédient en spécial" />
+            </td>
+            <td>
+                <input type="button" class="btn btn-danger" id="removeButton" value="Enlever le dernier ingrédient" />
+            </td>
+            <td>
+                <input type="button" class="btn btn-warning" id="resetButton" value="Recommencer" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" class="btn btn-success" value="Générer une liste d'épicerie" />
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" id="nbrIngredients" name="nbrIngredients" value="1">
+</form>
+
+    {% endblock %}
