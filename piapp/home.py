@@ -2,25 +2,14 @@
 from flask import Flask, redirect, url_for, render_template, request, session, flash
 from flask_sqlalchemy import SQLAlchemy
 import random
-
-
-from PIL import Image
-import pytesseract
-from wand.image import Image as Img
-import nltk
-from nltk.tokenize import word_tokenize
-from nltk.tag import pos_tag
-
-
-import RPi.GPIO as GPIO
+import string
 import time
 
 
 app = Flask(__name__)
-app.secret_key = "!&%@sdsdsahywybfkb15446456565566svdfjhsfgjjdjeugfbcotsc#!(@%$@(!?(!diihbc*@?$!@(&"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/pi/db/flaskDB'
+app.secret_key = ''.join(random.SystemRandom().choice(string.ascii_letters + string.digits) for _ in range(10))
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./flaskDB'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
 db = SQLAlchemy(app)
 
 
